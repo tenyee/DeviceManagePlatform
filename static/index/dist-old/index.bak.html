@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Demo</title>
+    <link rel="stylesheet" href="{% static 'index/dist/index.css' %}" />
+</head>
+
+<body>
+
+    <div id="root"></div>
+    <script>
+        urlList = [{
+            name: '设备信息',
+            url: 'db/search?model_name=DeviceInfo'
+        }, {
+            name: '单板查询',
+            url: '{% static "index/dist/data/data.1.json" %}'
+        }, {
+            name: '开发中',
+            url: '{% static "index/dist/data/data.2.json" %}'
+        }];
+    </script>
+    <script src="{% static 'index/dist/common.js' %}"></script>
+    <script src="{% static 'index/dist/index.js' %}"></script>
+
+</body>
+
+</html>
