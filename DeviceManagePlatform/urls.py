@@ -18,7 +18,7 @@ from django.contrib import admin
 from . import view, db_interface
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
+    url(r'^admin', admin.site.urls),
     url(r'db/update', db_interface.update),
     url(r'db/search', db_interface.search),
     url(r'db/add_items', db_interface.add_items),

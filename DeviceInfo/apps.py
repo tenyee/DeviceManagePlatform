@@ -2,4 +2,4 @@ from django.apps import AppConfig
 
 
 class DeviceinfoConfig(AppConfig):
-    name = 'DeviceInfo'
+    name = '设备信息'

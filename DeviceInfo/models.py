@@ -1,8 +1,8 @@
 # -*- coding:utf-8 -*-
 from django.db import models
-
+from Base import BaseModel, Utils
 # Create your models here.
-class DeviceInfo(models.Model):
+class DeviceInfo(models.Model, BaseModel.BaseModel):
 	verbose_name = '设备信息'
 
 	dev_ip       = models.CharField('设备IP',max_length = 128)
@@ -53,7 +53,15 @@ class DeviceInfo(models.Model):
 		return result
 
 	def set(self, data):
-		self.dev_ip = data["dev_ip"]
+		if data == None or data == {}:
+			return 
+
+		self.dev_ip       = Utils.get_value(data, "dev_ip")
+		self.product_type = Utils.get_value(data, "product_type")
+		self.dev_linux_ip = Utils.get_value(data, "dev_linux_ip")
+		self.location     = Utils.get_value(data, "location")
+		self.update_time  = Utils.get_value(data, "update_time")
+		self.status       = Utils.get_value(data, "status")
 
 	#注意哪些可更新，哪些不行的
 	def update(self, field, value):

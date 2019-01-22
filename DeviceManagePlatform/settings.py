@@ -11,7 +11,8 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
 import os
-
+import sys
+print("czw:", sys.path)
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -38,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'DeviceInfo',
+    'BoardInfo',
+    'django_crontab',
 ]
 
 MIDDLEWARE = [
@@ -100,7 +103,11 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
+# 最简单配置
+CRONJOBS = [
+    # 表示2分钟执行
+    ('*/2 * * * *', 'DeviceManagePlatform.timer_process.task')
+]
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
 
