@@ -3,6 +3,12 @@ import threading
 from multiprocessing import Pool, Process, Queue
 import multiprocessing
 import os, time, random
+
+'''
+参考：
+1。日志模块:https://www.cnblogs.com/CJOKER/p/8295272.html
+'''
+
 #全局lock
 threadLock = threading.Lock()
     
@@ -81,7 +87,7 @@ def PullTaskProcess(param):
    slowQueue   = param["slowQueue"]  #慢速队列，用于传送慢速处理进程
    normalQueue = param["normalQueue"]#常规队列
    tagData     = param["tagData"]#数据标签，用于分流，由各进程更新
-   watchDog   = param["watchDog"]
+   watchDog    = param["watchDog"]
    while True:
       #1.获取数据
       try:
@@ -195,19 +201,19 @@ def process_test():
    
    #构造数据
    param = multiprocessing.Manager().dict()  #创建主进程与子进程共享
-   param["quickQueue"]  = quickQueue
-   param["slowQueue"]   = slowQueue
-   param["normalQueue"] = normalQueue
-   param["tagData"]     = manager.dict()
-   param["watchDog"]     = manager.dict()
-   param["tagData"]["PullTaskProcess"] = 0
-   param["tagData"]["QuickTaskProcess"] = 0
-   param["tagData"]["SlowTaskProcess"] = 0
+   param["quickQueue"]                   = quickQueue
+   param["slowQueue"]                    = slowQueue
+   param["normalQueue"]                  = normalQueue
+   param["tagData"]                      = manager.dict()
+   param["watchDog"]                     = manager.dict()
+   param["tagData"]["PullTaskProcess"]   = 0
+   param["tagData"]["QuickTaskProcess"]  = 0
+   param["tagData"]["SlowTaskProcess"]   = 0
    param["tagData"]["NormalTaskProcess"] = 0
-   param["watchDog"]["PullTaskProcess"] = 0
+   param["watchDog"]["PullTaskProcess"]  = 0
    param["watchDog"]["QuickTaskProcess"] = 0
-   param["watchDog"]["SlowTaskProcess"] = 0
-   param["watchDog"]["NormalTaskProcess"] = 0
+   param["watchDog"]["SlowTaskProcess"]  = 0
+   param["watchDog"]["NormalTaskProcess"]= 0
    
    #创建四个子进程
    #pullProcess   = Process(target = PullTaskProcess,   args = ())
@@ -220,9 +226,9 @@ def process_test():
    normalProcess.start()
    
    count = {}
-   count["QuickTaskProcess"] = 0
-   count["SlowTaskProcess"] = 0
-   count["NormalTaskProcess"] = 0
+   count["QuickTaskProcess"]   = 0
+   count["SlowTaskProcess"]    = 0
+   count["NormalTaskProcess"]  = 0
    while True:
       time.sleep(1)
       print("---main---")
